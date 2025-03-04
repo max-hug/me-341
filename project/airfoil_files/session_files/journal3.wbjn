@@ -1,0 +1,16 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+system1 = GetSystem(Name="FFF")
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True)
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+Save(Overwrite=True)
+geometry1.Exit()
+Save(Overwrite=True)
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/open.wbjn")

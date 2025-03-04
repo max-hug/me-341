@@ -1,0 +1,5 @@
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+RunScript(FilePath="C:/Users/maxhu/Documents/VS_Code/ME_341/project/scripts/update.wbjn")
+Save(Overwrite=True)

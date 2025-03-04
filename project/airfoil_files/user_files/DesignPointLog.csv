@@ -1,0 +1,12 @@
+﻿# 
+# This file contains the parameter values of the Design Points successfully updated by Ansys Workbench.
+# Project name: airfoil
+# Creation date: 03/03/2025 15:26:53
+# 
+# 03/03/2025 15:26:53
+# The parameters defined in the project are:
+# ,P1 - Edge Sizing Number of Divisions,P2 - Edge Sizing 2 Number of Divisions,P3 - Edge Sizing 3 Number of Divisions,P4 - Edge Sizing 4 Number of Divisions
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2,P3,P4
+DP 0,50,50,50,50

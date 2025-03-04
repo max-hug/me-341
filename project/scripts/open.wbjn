@@ -1,0 +1,9 @@
+﻿# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+Open(FilePath="C:\\Users\\maxhu\\Documents\\VS_Code\ME_341\\project\\airfoil.wbpj")
+
+system1 = GetSystem(Name="FFF")
+geometry1 = system1.GetContainer(ComponentName="Geometry")
+geometry1.Edit(IsSpaceClaimGeometry=True, Interactive=True)
+

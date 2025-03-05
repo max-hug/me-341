@@ -12,7 +12,7 @@ slat_length = 0.15
 slat_angles = [2.1,2.3,2.9,2.5,2.95,3,3]
 
 frame_x_control = [0, 0.6, 0.85, 1]
-frame_y_control = [0.4, 0.25, 0.07, 0]
+frame_y_control = [0.12, 0.25, 0.07, 0]
 
 frame_control = [frame_x_control, frame_y_control]
 print(frame_control)

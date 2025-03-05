@@ -30,7 +30,7 @@ def angle_constraint(airfoil_coords):
         points = np.array(list(zip(airfoil_coords[0][i:i+3], airfoil_coords[1][i:i+3])))
         max_angle = max(max_angle,find_angle(points))
 
-    return max_angle
+    return max_angle - 180 <= 0
 
 def frame_constraint(airfoil_coords, frame_control):
 
@@ -49,8 +49,8 @@ def frame_constraint(airfoil_coords, frame_control):
     bezier_3 = lambda x, t: x[0]*(1-t)**3 + 3*x[1]*t*(1-t)**2 + 3*x[2]*t**2*(1-t)+x[3]*t**3
     frame_samples = np.column_stack([-1*bezier_3(frame_control[0], t), bezier_3(frame_control[1], t)])
 
-    return sum(not polygon.contains(Point(p)) for p in frame_samples)/20.0 # 20 since 20 samples
+    return (sum(not polygon.contains(Point(p)) for p in frame_samples)/20.0) <= 0 # 20 since 20 samples
 
 def te_slat_constraint(slats_used, slat_angles):
     num_slats = len(slat_angles)
-    return 1.0*(num_slats-slats_used)/num_slats
+    return (1.0*(num_slats-slats_used)/num_slats) <= 0

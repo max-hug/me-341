@@ -6,21 +6,22 @@ import constraints
 
 num_parameters = 56
 
-slat_length = 0.05
+slat_length = 0.15
 #slat_angles = [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 #slat_angles = [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-slat_angles = [2.33, 1, 2]
+slat_angles = [2.1,2.3,2.9,2.5,2.95,3,3]
 
 frame_x_control = [0, 0.6, 0.85, 1]
 frame_y_control = [0.4, 0.25, 0.07, 0]
 
 frame_control = [frame_x_control, frame_y_control]
+print(frame_control)
 
 [airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, slat_angles, num_parameters, True)
 
-#print(constraints.angle_constraint([airfoil_x, airfoil_y]))
-#print(constraints.frame_constraint([airfoil_x, airfoil_y], frame_control))
-#print(constraints.te_slat_constraint(te_slats_used, slat_angles))
+print(constraints.angle_constraint([airfoil_x, airfoil_y]))
+print(constraints.frame_constraint([airfoil_x, airfoil_y], frame_control))
+print(constraints.te_slat_constraint(te_slats_used, slat_angles))
 
 airfoil_y -= max(airfoil_y)/2
 

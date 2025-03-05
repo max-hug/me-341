@@ -75,7 +75,7 @@ def generate_airfoil(frame_control, slat_length, slat_angles, num_parameters, pl
     num_slats = len(slat_angles)
 
     [x_le, y_le] = np.array(generate_le([-1, 0], slat_length, slat_angles))
-    print((num_parameters/2)-2*num_slats)
+    #print((num_parameters/2)-2*num_slats)
     x_te, y_te, slats_used = generate_te(frame_control, slat_length, num_slats, (num_parameters/2)-2*num_slats)
 
     airfoil_x, airfoil_y = [*x_le, *x_te], [*y_le, *y_te]

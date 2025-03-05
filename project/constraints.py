@@ -20,7 +20,6 @@ def find_angle(points):
 
     angle = np.asin(max(-1, min(1, sin_theta))) # Clamping for numerical stability
 
-    print("{} {}".format(angle, np.acos(cos_theta)))
     return angle 
 
 ### MAIN FUNCTIONS ###
@@ -49,7 +48,7 @@ def frame_constraint(airfoil_coords, frame_control):
     polygon_points = np.column_stack([airfoil_x_filtered, airfoil_y_filtered])
     polygon = Polygon(polygon_points)
 
-    t = np.linspace(0+1e-5, 1-1e-5, 20) # since its touching at the ends, dont start at them
+    t = np.linspace(0+1e-5, 1-1e-1, 20) # since its touching at the ends, dont start at them
     bezier_3 = lambda x, t: x[0]*(1-t)**3 + 3*x[1]*t*(1-t)**2 + 3*x[2]*t**2*(1-t)+x[3]*t**3
     frame_samples = np.column_stack([-1*bezier_3(frame_control[0], t), bezier_3(frame_control[1], t)])
 
@@ -59,5 +58,15 @@ def te_slat_constraint(slats_used, slat_angles):
     num_slats = len(slat_angles)
     return 1.0*(slats_used-num_slats)/num_slats
 
-def reflex_constraint(slat_angles):
-    return 2*np.pi - sum(np.pi-np.array(slat_angles))
+def max_reflex_constraint(slat_angles):
+    return 3*np.pi/2 - sum(np.pi-np.array(slat_angles))
+
+def min_reflex_constraint(slat_angles):
+    return sum(np.pi-np.array(slat_angles)) - 3*np.pi/4
+
+def connector_length(airfoil_coords, slat_angles, slat_length):
+    num_slats = len(slat_angles)
+    point1 = np.array(airfoil_coords[0][num_slats], airfoil_coords[1][num_slats])
+    point2 = np.array(airfoil_coords[0][num_slats+1], airfoil_coords[1][num_slats+1])
+    dist = np.linalg.norm(point2-point1)
+    return 6*slat_length - dist

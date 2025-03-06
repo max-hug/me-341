@@ -7,10 +7,10 @@ import constraints
 
 #slat_angles = [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
 #slat_angles = [1, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
-#slat_angles = [1.9,2,2.9,2.8,2.95,3.1,3.1]
-slat_angles = [1, 2]
+slat_angles = [1.9,2,2.9,2.8,2.95,3.1,3.1]
+#slat_angles = [1, 2]
 
-slat_length = 0.9/len(slat_angles)
+slat_length = 1.1/len(slat_angles)
 
 frame_x_control = [0, 0.6, 0.85, 1]
 frame_y_control = [0.3, 0.15, 0.07, 0]

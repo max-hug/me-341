@@ -7,7 +7,6 @@ dp0/FFF/Fluent/FFF.1.ip
 dp0/FFF/Fluent/FFF.1.set
 dp0/FFF/Fluent/SolutionMonitor.gz
 dp0/FFF/MECH/FFF.1.msh
-dp0/FFF/MECH/FFF.msh
 dp0/global/MECH/FFF.mshdb
 dp0/act.dat
 dp0/designPoint.wbdp
@@ -17,6 +16,8 @@ session_files/journal2.wbjn
 session_files/journal3.wbjn
 session_files/journal4.wbjn
 session_files/journal5.wbjn
+session_files/journal5_crashed.wbjn
+session_files/journal6.wbjn
 dp0/
 dpall/
 progress_files/

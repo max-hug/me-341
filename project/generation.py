@@ -38,7 +38,7 @@ def generate_le (start, slat_length, thetas):
 
     return [x_coords, y_coords]
 
-def generate_te(control_points, slat_length, num_slats, extra_points):
+def generate_te(control_points, slat_length, num_slats):
     x_coords = [bezier_3(control_points[0], 1)]
     y_coords = [bezier_3(control_points[1], 1)]
 
@@ -61,22 +61,16 @@ def generate_te(control_points, slat_length, num_slats, extra_points):
         y_coords.insert(0, y_coords[0] - scaling_factor*apex_y_dist)
         slat += 1
 
-    while (extra_points > 0):
-        x_coords.insert(1, (x_coords[0] + x_coords[1])/2)
-        y_coords.insert(1, (y_coords[0] + y_coords[1])/2)
-        extra_points-=1
-
     return x_coords, y_coords, slat
 
 ### MAIN FUNCTIONS ###
 
-def generate_airfoil(frame_control, slat_length, slat_angles, num_parameters, plot):
+def generate_airfoil(frame_control, slat_length, slat_angles, plot):
 
     num_slats = len(slat_angles)
 
     [x_le, y_le] = np.array(generate_le([-1, 0], slat_length, slat_angles))
-    #print((num_parameters/2)-2*num_slats)
-    x_te, y_te, slats_used = generate_te(frame_control, slat_length, num_slats, (num_parameters/2)-2*num_slats)
+    x_te, y_te, slats_used = generate_te(frame_control, slat_length, num_slats)
 
     airfoil_x, airfoil_y = [*x_le, *x_te], [*y_le, *y_te]
 

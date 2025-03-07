@@ -34,8 +34,8 @@
       <container-type valType="String">Ansys.DesignModeler.Core.Addin:Geometry</container-type>
       <storage-scheme-id valType="String">version-1-format</storage-scheme-id>
       <deleted-sources valType="String">[]</deleted-sources>
-      <last-updated valType="Int64">6472</last-updated>
-      <last-modified-by-usage valType="String">{"Extrinsic": 6494, "Input": 6470, "Output": 6470}</last-modified-by-usage>
+      <last-updated valType="Int64">6593</last-updated>
+      <last-modified-by-usage valType="String">{"Extrinsic": 6595, "Input": 6591, "Output": 6591}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{}</outputs-generated-by-type>
       <unique-system-dir valType="String">FFF</unique-system-dir>
       <contains-significant-data valType="Boolean">true</contains-significant-data>
@@ -185,6 +185,11 @@
         <object-name valType="String">SCDataObject 25</object-name>
         <member-data valType="String">{"DisplayText": "SCDataObject", "Guid": "62b9eb48-b372-4e12-a1b4-c6f12460ce4f"}</member-data>
       </Object>
+      <Object Name="/Geometry/SpaceClaimCallBackData:SCDataObject 26" Version="1.0">
+        <class-type valType="String">SpaceClaimCallBackData</class-type>
+        <object-name valType="String">SCDataObject 26</object-name>
+        <member-data valType="String">{"DisplayText": "SCDataObject", "Guid": "62b9eb48-b372-4e12-a1b4-c6f12460ce4f"}</member-data>
+      </Object>
     </Container>
     <Container Name="Mesh" Version="1.0">
       <container-type valType="String">Ansys.Meshing.Core.Addin:SimulationModel</container-type>
@@ -193,7 +198,7 @@
       <last-updated valType="Int64">0</last-updated>
       <last-modified-by-usage valType="String">{"Extrinsic": 6486, "Input": 6486, "Output": 6486}</last-modified-by-usage>
       <outputs-generated-by-type valType="String">{"MechanicalModel": 5554, "MechanicalMesh": 5554}</outputs-generated-by-type>
-      <last-update-regen-times valType="String">{"Preferences": 0, "ToolbarExp": 0, "FileTypesContainer": 0, "FileContainer": 0, "Messages": 0, "Parameters": 0, "Schematic": 0, "ReportDataContainer": 0, "Graphics": 0, "Units": 0, "RepContainer": 0, "Scopes": 0, "Geometry": 6472, "Mesh": 0, "Setup": 2562, "Solution": 2569, "Results": 0, "SpaceClaimSessionContainer": 0}</last-update-regen-times>
+      <last-update-regen-times valType="String">{"Preferences": 0, "ToolbarExp": 0, "FileTypesContainer": 0, "FileContainer": 0, "Messages": 0, "Parameters": 0, "Schematic": 0, "ReportDataContainer": 0, "Graphics": 0, "Units": 0, "RepContainer": 0, "Scopes": 0, "Geometry": 6472, "Mesh": 0, "Setup": 2562, "Solution": 2569, "Results": 0}</last-update-regen-times>
       <unique-system-dir valType="String">FFF</unique-system-dir>
       <contains-significant-data valType="Boolean">true</contains-significant-data>
       <Object Name="/Mesh/SimulationConnection:SimulationConnection" Version="1.0">

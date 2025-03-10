@@ -16,14 +16,10 @@ frame_x_control = [0, 0.6, 0.85, 1]
 frame_y_control = [0.3, 0.15, 0.07, 0]
 
 frame_control = [frame_x_control, frame_y_control]
-print(frame_control)
 
-[airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, slat_angles, True)
 
-#print(constraints.angle_constraint([airfoil_x, airfoil_y]))
-#print(constraints.frame_constraint([airfoil_x, airfoil_y], frame_control))
-print(constraints.te_slat_constraint(te_slats_used, slat_angles))
-print(len(airfoil_x))
+
+[airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, slat_angles, False)
 
 export_airfoil = np.array([airfoil_x, airfoil_y]).T
 

@@ -1,0 +1,204 @@
+Transcript Start Time:  17:12:13, 10 Mar 2025 Central Daylight Time 
+Current Directory: "C:\Windows\system32"
+
+Build Time: Nov 26 2024 13:27:40 EST 
+Executable Path: C:/PROGRA~1/ANSYSI~1/ANSYSS~1/v251/fluent/ntbin/win64/fluent.exe
+
+-------------------------------------------------------------------------------------
+ID    Hostname         Core  O.S.         PID     Vendor                            
+-------------------------------------------------------------------------------------
+n3    DESKTOP-ETFE2PJ  4/22  Windows-x64  71116   Intel(R) Core(TM) Ultra 9 185H    
+n2    DESKTOP-ETFE2PJ  3/22  Windows-x64  144968  Intel(R) Core(TM) Ultra 9 185H    
+n1    DESKTOP-ETFE2PJ  2/22  Windows-x64  52552   Intel(R) Core(TM) Ultra 9 185H    
+n0*   DESKTOP-ETFE2PJ  1/22  Windows-x64  173220  Intel(R) Core(TM) Ultra 9 185H    
+host  DESKTOP-ETFE2PJ        Windows-x64  148832  Intel(R) Core(TM) Ultra 9 185H    
+
+MPI Option Selected: intel
+Selected system interconnect: default
+-------------------------------------------------------------------------------------
+
+Cortex Process ID: 80096 
+License Server Path: () 
+Note: Rank = 0: Process affinity not being set (6).
+Note: Rank = 1: Process affinity not being set (6).
+Note: Rank = 2: Process affinity not being set (6).
+Note: Rank = 3: Process affinity not being set (6).
+Reading setting file in cache: "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\FFF.1.set"
+Reading "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\MECH\FFF.1.msh"...
+Buffering for file scan...
+
+    4955 nodes, binary.
+     501 nodes, binary.
+   10179 2D interior faces, zone  1, binary.
+     100 2D velocity-inlet faces, zone  5, binary.
+      50 2D pressure-outlet faces, zone  6, binary.
+     229 2D wall faces, zone  7, binary.
+      61 2D wall faces, zone  8, binary.
+      61 2D wall faces, zone  9, binary.
+    5224 mixed cells, zone  4, binary.
+
+
+
+Following contexts active in the case file have been de-activated because of their current context control conditions:
+"coupled-pseudo-transient"
+
+Building...
+     mesh
+	auto partitioning mesh by Metis (fast),
+	distributing mesh
+		parts....,
+		faces....,
+		nodes....,
+		cells....,
+        bandwidth reduction using Reverse Cuthill-McKee: 1298/47 = 27.617
+     materials,
+     interface,
+     domains,
+	mixture
+     zones,
+	sc-top-wall
+	sc-bottom-wall
+	sc-airfoil
+	sc-outlet
+	sc-inlet
+	domain
+	interior-domainSetting domain (mixture) ... Done.
+
+Applying mesh operation "Change Zone Type"
+
+Applying mesh operation "Change Zone Type [ 2 ]"
+ Setting zone id of domain to 4.
+ Setting zone id of sc-bottom-wall to 7.
+ Setting zone id of interior-domain to 1.
+ Setting zone id of sc-inlet to 6.
+ Setting zone id of sc-outlet to 8.
+ Setting zone id of sc-airfoil to 9.
+ Setting zone id of sc-top-wall to 5.
+Done.
+Setting domain (mixture) ... Done.
+Setting sc-bottom-wall (mixture) ... Done.
+Setting interior-domain (mixture) ... Done.
+Setting sc-top-wall (mixture) ... Done.
+Setting sc-inlet (mixture) ... Done.
+Setting sc-outlet (mixture) ... Done.
+Setting sc-airfoil (mixture) ... Done.
+
+     parallel,
+Done.
+
+Preparing mesh for display...
+Done.
+
+Setting Post Processing and Surfaces information ...	 Done.
+"Updating Setup cell..."
+"Updating Solution cell..."
+Reading C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_files\\dp0\\FFF\\Fluent\\FFF.ip...
+Reading IP data ...
+	x-coord
+	y-coord
+	pressure
+	x-velocity
+	y-velocity
+	k
+	omega
+  Done.
+  Initializing values...
+  Done.
+Fast-loading "C:\PROGRA~1\ANSYSI~1\ANSYSS~1\v251\fluent\fluent25.1.0\\addons\afd\lib\hdfio.bin"
+Done.
+
+Writing to DESKTOP-ETFE2PJ:"C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\FFF.1-Setup-Output.cas.h5" in NODE0 mode and compression level 1 ...
+Grouping cells for Laplace smoothing ...
+        5224 cells,     1 zone  ...
+       10680 faces,     6 zones ...
+        5456 nodes,     1 zone  ...
+  Done.
+Done.
+Overwriting "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\drag-rfile.out"  of Report File "drag-rfile"
+Overwriting "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\lift-rfile.out"  of Report File "lift-rfile"
+
+  iter  continuity  x-velocity  y-velocity           k       omega     time/iter
+     1  1.0000e+00  1.2977e-03  8.9095e-04  9.5855e-02  1.4220e-02  0:00:18  499
+     2  6.1789e-01  1.0116e-03  6.6717e-04  4.9044e-02  5.3298e-03  0:00:27  498
+     3  3.5945e-01  6.0005e-04  3.6820e-04  2.6023e-02  2.2251e-03  0:00:28  497
+     4  2.4026e-01  3.8422e-04  2.1304e-04  1.7889e-02  1.0881e-03  0:00:45  496
+     5  1.8135e-01  2.6373e-04  1.3530e-04  1.6577e-02  6.7820e-04  0:00:42  495
+     6  1.3977e-01  2.0390e-04  9.7395e-05  1.7492e-02  5.2543e-04  0:00:41  494
+     7  1.0874e-01  1.8438e-04  8.1487e-05  2.0119e-02  4.7677e-04  0:00:40  493
+     8  8.7033e-02  1.8178e-04  7.5294e-05  2.3240e-02  4.4449e-04  0:00:40  492
+     9  7.0440e-02  1.8345e-04  7.1633e-05  2.5126e-02  4.2473e-04  0:00:40  491
+    10  6.0454e-02  1.8190e-04  6.6565e-05  2.6769e-02  3.9290e-04  0:00:39  490
+    11  5.3889e-02  1.7494e-04  6.7820e-05  2.8029e-02  3.5472e-04  0:00:38  489
+
+  iter  continuity  x-velocity  y-velocity           k       omega     time/iter
+    12  4.9341e-02  1.7242e-04  7.3019e-05  2.7564e-02  3.1491e-04  0:00:39  488
+    13  4.4597e-02  1.7391e-04  7.4823e-05  2.6268e-02  2.7375e-04  0:00:39  487
+    14  4.2206e-02  1.7343e-04  7.1715e-05  2.5398e-02  2.4643e-04  0:00:38  486
+    15  3.8646e-02  1.6397e-04  6.5844e-05  2.3904e-02  2.1459e-04  0:00:36  485
+    16  3.5112e-02  1.4896e-04  5.7977e-05  2.1801e-02  1.8252e-04  0:00:36  484
+    17  3.1747e-02  1.3248e-04  4.9815e-05  1.9403e-02  1.5542e-04  0:00:35  483
+    18  2.8142e-02  1.1827e-04  4.3262e-05  1.6750e-02  1.3231e-04  0:00:37  482
+    19  2.5032e-02  1.0532e-04  3.8162e-05  1.4228e-02  1.1425e-04  0:00:35  481
+    20  2.1763e-02  9.3857e-05  3.3314e-05  1.1980e-02  1.0033e-04  0:00:35  480
+    21  1.9234e-02  8.4565e-05  2.8964e-05  9.6216e-03  8.5830e-05  0:00:35  479
+    22  1.7098e-02  7.5100e-05  2.4896e-05  7.3965e-03  7.3385e-05  0:00:34  478
+
+  iter  continuity  x-velocity  y-velocity           k       omega     time/iter
+    23  1.5021e-02  6.6229e-05  2.1467e-05  5.6900e-03  6.2099e-05  0:00:34  477
+    24  1.2101e-02  5.6437e-05  1.8598e-05  4.5000e-03  5.3801e-05  0:00:34  476
+    25  1.0093e-02  4.8733e-05  1.6197e-05  3.6087e-03  4.6074e-05  0:00:33  475
+    26  8.6087e-03  4.1882e-05  1.3154e-05  2.9927e-03  3.9141e-05  0:00:32  474
+    27  7.4633e-03  3.5805e-05  1.0762e-05  2.5479e-03  3.3644e-05  0:00:33  473
+    28  6.5574e-03  3.0678e-05  8.7800e-06  2.1544e-03  2.9095e-05  0:00:33  472
+    29  5.7319e-03  2.6067e-05  7.0964e-06  1.8054e-03  2.5251e-05  0:00:32  471
+    30  4.9521e-03  2.2022e-05  5.7707e-06  1.5082e-03  2.2019e-05  0:00:32  470
+    31  4.2020e-03  1.8546e-05  4.7442e-06  1.2647e-03  1.9233e-05  0:00:31  469
+    32  3.5547e-03  1.5689e-05  3.9297e-06  1.0648e-03  1.6803e-05  0:00:32  468
+    33  3.0381e-03  1.3262e-05  3.2596e-06  8.9673e-04  1.4741e-05  0:00:31  467
+
+  iter  continuity  x-velocity  y-velocity           k       omega     time/iter
+    34  2.5563e-03  1.1120e-05  2.7264e-06  7.5267e-04  1.2894e-05  0:00:30  466
+    35  2.1642e-03  9.2742e-06  2.3137e-06  6.3075e-04  1.1313e-05  0:00:30  465
+    36  1.8238e-03  7.7202e-06  1.9517e-06  5.2494e-04  9.9597e-06  0:00:30  464
+    37  1.5348e-03  6.4271e-06  1.6430e-06  4.3730e-04  8.7608e-06  0:00:31  463
+    38  1.2887e-03  5.3494e-06  1.3711e-06  3.6312e-04  7.7226e-06  0:01:14  462
+    39  1.0758e-03  4.4373e-06  1.1335e-06  3.0037e-04  6.8054e-06  0:01:05  461
+    40  8.9895e-04  3.6772e-06  9.3224e-07  2.4890e-04  5.9956e-06  0:00:58  460
+!   40 solution is converged
+Registering ReportDefFiles, ("C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\lift-rfile.out" "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\drag-rfile.out")
+Writing "| gzip -2cf > SolutionMonitor.gz"...
+Writing temporary file C:\\Users\\maxhu\\AppData\\Local\\Temp\\flntgz-1488322 ...
+Done.
+
+Writing data to C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_files\\dp0\\FFF\\Fluent\\FFF.1.ip ...
+	x-coord
+	y-coord
+	pressure
+	x-velocity
+	y-velocity
+	k
+	omega
+Done.
+
+Performance Timer for 40 iterations on 4 compute nodes
+  Average wall-clock time per iteration:                0.011 sec
+  Global reductions per iteration:                        109 ops
+  Global reductions time per iteration:                 0.000 sec (0.0%)
+  Message count per iteration:                           5075 messages
+  Data transfer per iteration:                          0.263 MB
+  LE solves per iteration:                                  3 solves
+  LE wall-clock time per iteration:                     0.007 sec (60.0%)
+  LE global solves per iteration:                           6 solves
+  LE global wall-clock time per iteration:              0.000 sec (2.0%)
+  LE global matrix maximum size:                           48
+  AMG cycles per iteration:                             6.425 cycles
+  Relaxation sweeps per iteration:                       1314 sweeps
+  Relaxation exchanges per iteration:                       0 exchanges
+  LE early protections (stall) per iteration:           0.000 times
+  LE early protections (divergence) per iteration:      0.000 times
+  Total SVARS touched:                                    380
+
+  Total wall-clock time:                                0.443 sec
+
+Transcript Stop Time:  17:12:47, 10 Mar 2025 Central Daylight Time 
+Total Transcript Time: 0 Minute 33 Second.

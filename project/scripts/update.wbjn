@@ -1,9 +1,10 @@
 ﻿# encoding: utf-8
 # 2024 R2
-SetScriptVersion(Version="24.2.133")
+SetScriptVersion(Version="25.1.122")
 
 system1 = GetSystem(Name="FFF")
 geometry1 = system1.GetContainer(ComponentName="Geometry")
 
-geometry1.RunScript("C:\Users\maxhu\Documents\VS_Code\ME_341\project\scripts\sc_script.py")
-#Update()
+geometry1.RunScript("C:/Users/maxhu/Documents/VS_Code/me-341/project/scripts/sc_script.py")
+Update()
+Parameters.ExportAllDesignPointsData(FilePath="C:/Users/maxhu/Documents/VS_Code/me-341/project/scripts/dp_data.csv")

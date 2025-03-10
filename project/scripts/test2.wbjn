@@ -1,8 +1,0 @@
-﻿# encoding: utf-8
-# 2024 R2
-SetScriptVersion(Version="24.2.133")
-designPoint1 = Parameters.GetDesignPoint(Name="0")
-parameter1 = Parameters.GetParameter(Name="P6")
-designPoint1.SetParameterExpression(
-    Parameter=parameter1,
-    Expression="1")

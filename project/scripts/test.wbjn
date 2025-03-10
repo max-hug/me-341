@@ -6,3 +6,18 @@ parameter1 = Parameters.GetParameter(Name="P8")
 designPoint1.SetParameterExpression(
     Parameter=parameter1,
     Expression="10")
+
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+designPoint1 = Parameters.GetDesignPoint(Name="0")
+Parameters.ExportDesignPoints(DesignPoints=[designPoint1])
+
+# encoding: utf-8
+# 2024 R2
+SetScriptVersion(Version="24.2.133")
+Parameters.ExportAllDesignPointsData(FilePath="C:/Users/maxhu/OneDrive/Desktop/test.csv")
+designPoint1 = Parameters.GetDesignPoint(Name="0")
+Parameters.ExportDesignPoints(DesignPoints=[designPoint1])
+ExportReport(FilePath="C:/Users/maxhu/OneDrive/Desktop/NACA0015_2D_V8_files/user_files/NACA0015_2D_V8_report.html")
+

@@ -1,0 +1,8 @@
+﻿# 
+# 03/10/2025 17:12:53
+# The parameters defined in the project are:
+# ,P1 - lift-op [N],P2 - drag-op [N]
+# 
+# The following header line defines the name of the columns by reference to the parameters.
+Name,P1,P2
+DP 0,9340.4268,307.87143

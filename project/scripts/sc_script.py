@@ -6,9 +6,9 @@ with open(csv_file, 'r') as file:
     reader = csv.reader(file)
     coords = [[float(value) for value in row] for row in reader]
 
-domain_height = 1.5 # [m]
-domain_left = 2 # [m]
-domain_right = 3 # [m]
+domain_height = 5 # [m]
+domain_left = 4 # [m]
+domain_right = 6 # [m]
 
 # Delete Everything
 while GetRootPart().Bodies.Count > 0:
@@ -24,9 +24,9 @@ NamedSelection.Delete("Domain", "SC-Inlet", "SC-Outlet", "SC-Airfoil", "SC-Top-W
 result = ViewHelper.SetSketchPlane(Plane.PlaneXY)
 
 # Domain
-point1 = Point2D.Create(M(-domain_left),M(-domain_height/2))
-point2 = Point2D.Create(M(-domain_left),M(domain_height/2))
-point3 = Point2D.Create(M(domain_right),M(domain_height/2))
+point1 = Point2D.Create(M(-domain_left),M(-2.5))
+point2 = Point2D.Create(M(-domain_left),M(2.5))
+point3 = Point2D.Create(M(domain_right),M(2.5))
 result = SketchRectangle.Create(point1, point2, point3)
 
 # airfoil
@@ -45,16 +45,16 @@ result = ViewHelper.SetViewMode(mode)
 airfoil_edges = []
 
 for edge in GetRootPart().Bodies[0].Edges:
-    if(abs(edge.EvalMid().Point[0] + domain_left) < 1e-2):
+    if(abs(edge.EvalMid().Point[0] + domain_left) < 1e-1):
         sel = Selection.Create(edge)
         NamedSelection.Create(sel, Selection.Empty(), "SC-Inlet")
-    elif(abs(edge.EvalMid().Point[0] - domain_right) < 1e-2):
+    elif(abs(edge.EvalMid().Point[0] - domain_right) < 1e-1):
         sel = Selection.Create(edge)
         NamedSelection.Create(sel, Selection.Empty(), "SC-Outlet")
-    elif(abs(edge.EvalMid().Point[1] - domain_height/2) < 1e-2):
+    elif(abs(edge.EvalMid().Point[1] - 2.5) < 1e-1):
         sel = Selection.Create(edge)
         NamedSelection.Create(sel, Selection.Empty(), "SC-Top-Wall")
-    elif(abs(edge.EvalMid().Point[1] + domain_height/2) < 1e-2):
+    elif(abs(edge.EvalMid().Point[1] + 2.5) < 1e-1):
         sel = Selection.Create(edge)
         NamedSelection.Create(sel, Selection.Empty(), "SC-Bottom-Wall")
     else:

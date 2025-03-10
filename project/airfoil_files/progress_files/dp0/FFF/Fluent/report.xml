@@ -1,8 +1,8 @@
 <FluentXMLReport>
 <version>
 Fluent
-Version: 2d, dp, pbns, lam (2d, double precision, pressure-based, laminar)
-Release: 24.2.0
+Version: 2d, pbns, sstkw (2d, pressure-based, SST k-omega)
+Release: 25.1.0
 Title: 
 </version>
 
@@ -11,24 +11,24 @@ Title:
 Models
 ------
 
-   Model                        Settings   
-   -------------------------------------
-   Space                        2D         
-   Time                         Steady     
-   Viscous                      Laminar    
-   Heat Transfer                Disabled   
-   Solidification and Melting   Disabled   
-   Species                      Disabled   
-   Coupled Dispersed Phase      Disabled   
-   NOx Pollutants               Disabled   
-   SOx Pollutants               Disabled   
-   Soot                         Disabled   
-   Mercury Pollutants           Disabled   
-   Structure                    Disabled   
-   Acoustics                    Disabled   
-   Eulerian Wall Film           Disabled   
-   Potential/Electrochemistry   Disabled   
-   Multiphase                   Disabled   
+   Model                        Settings                       
+   ---------------------------------------------------------
+   Space                        2D                             
+   Time                         Steady                         
+   Viscous                      SST k-omega turbulence model   
+   Heat Transfer                Disabled                       
+   Solidification and Melting   Disabled                       
+   Species                      Disabled                       
+   Coupled Dispersed Phase      Disabled                       
+   NOx Pollutants               Disabled                       
+   SOx Pollutants               Disabled                       
+   Soot                         Disabled                       
+   Mercury Pollutants           Disabled                       
+   Structure                    Disabled                       
+   Acoustics                    Disabled                       
+   Eulerian Wall Film           Disabled                       
+   Potential/Electrochemistry   Disabled                       
+   Multiphase                   Disabled                       
 
 </Models>
 
@@ -38,21 +38,16 @@ Material Properties
 
    Material: air (fluid)
 
-      Property               Units      Method     Value(s)     
-      -------------------------------------------------------
-      Density                kg/m^3     constant   1            
-      Cp (Specific Heat)     J/(kg K)   constant   1006.43      
-      Thermal Conductivity   W/(m K)    constant   0.0242       
-      Viscosity              kg/(m s)   constant   1.7894e-05   
-      Molecular Weight       kg/kmol    constant   28.966       
+      Property    Units      Method     Value(s)     
+      --------------------------------------------
+      Density     kg/m^3     constant   1            
+      Viscosity   kg/(m s)   constant   1.7894e-05   
 
    Material: aluminum (solid)
 
-      Property               Units      Method     Value(s)   
-      -----------------------------------------------------
-      Density                kg/m^3     constant   2719       
-      Cp (Specific Heat)     J/(kg K)   constant   871        
-      Thermal Conductivity   W/(m K)    constant   202.4      
+      Property   Units    Method     Value(s)   
+      ---------------------------------------
+      Density    kg/m^3   constant   2719       
 
 </MaterialProperties>
 
@@ -62,13 +57,13 @@ Cell Zone Conditions
 
    Zones
 
-      name                 id   type    
-      -------------------------------
-      solid-surface_body   3    fluid   
+      name     id   type    material   
+      ------------------------------
+      domain   4    fluid   air        
 
    Setup Conditions
 
-      solid-surface_body
+      domain
 
          Condition       Value   
          ---------------------
@@ -83,33 +78,50 @@ Boundary Conditions
 
    Zones
 
-      name      id   type              
-      ------------------------------
-      inlet     6    velocity-inlet    
-      outlet    7    pressure-outlet   
-      airfoil   8    wall              
+      name             id   type              
+      -------------------------------------
+      sc-bottom-wall   7    wall              
+      sc-inlet         6    velocity-inlet    
+      sc-outlet        8    pressure-outlet   
+      sc-airfoil       9    wall              
+      sc-top-wall      5    wall              
 
    Setup Conditions
 
-      inlet
-
-         Condition                       Value        
-         ------------------------------------------
-         Velocity Specification Method   Components   
-         X-Velocity [m/s]                99.45        
-         Y-Velocity [m/s]                10.45        
-
-      outlet
-
-         Condition   Value   
-         -----------------
-
-      airfoil
+      sc-bottom-wall
 
          Condition                  Value             
          ------------------------------------------
          Wall Motion                Stationary Wall   
          Shear Boundary Condition   No Slip           
+         Wall Surface Roughness     Standard          
+
+      sc-inlet
+
+         Condition                  Value   
+         --------------------------------
+         Velocity Magnitude [m/s]   100     
+
+      sc-outlet
+
+         Condition   Value   
+         -----------------
+
+      sc-airfoil
+
+         Condition                  Value             
+         ------------------------------------------
+         Wall Motion                Stationary Wall   
+         Shear Boundary Condition   No Slip           
+         Wall Surface Roughness     Standard          
+
+      sc-top-wall
+
+         Condition                  Value             
+         ------------------------------------------
+         Wall Motion                Stationary Wall   
+         Shear Boundary Condition   No Slip           
+         Wall Surface Roughness     Standard          
 
 </BoundaryConditions>
 
@@ -119,9 +131,10 @@ Solver Settings
 
    Equations
 
-      Equation   Solved   
-      -----------------
-      Flow       yes      
+      Equation     Solved   
+      -------------------
+      Flow         yes      
+      Turbulence   yes      
 
    Numerics
 
@@ -131,18 +144,23 @@ Solver Settings
 
    Pseudo Time Explicit Relaxation Factors
 
-      Variable            Relaxation Factor   
-      -------------------------------------
-      Density             1                   
-      Body Forces         1                   
-      Explicit Momentum   0.5                 
-      Explicit Pressure   0.5                 
+      Variable                    Relaxation Factor   
+      ---------------------------------------------
+      Density                     1                   
+      Body Forces                 1                   
+      Turbulent Kinetic Energy    0.75                
+      Specific Dissipation Rate   0.75                
+      Turbulent Viscosity         1                   
+      Explicit Momentum           0.5                 
+      Explicit Pressure           0.5                 
 
    Linear Solver
 
-      Variable   Solver Type   Termination Criterion   Residual Reduction Tolerance   
-      -----------------------------------------------------------------------------
-      Flow       F-Cycle       0.1                                                    
+      Variable                    Solver Type   Termination Criterion   Residual Reduction Tolerance   
+      ----------------------------------------------------------------------------------------------
+      Flow                        F-Cycle       0.1                                                    
+      Turbulent Kinetic Energy    F-Cycle       0.1                                                    
+      Specific Dissipation Rate   F-Cycle       0.1                                                    
 
    Pressure-Velocity Coupling
 
@@ -153,19 +171,24 @@ Solver Settings
 
    Discretization Scheme
 
-      Variable   Scheme                
-      ------------------------------
-      Pressure   Second Order          
-      Momentum   Second Order Upwind   
+      Variable                    Scheme                
+      -----------------------------------------------
+      Pressure                    Second Order          
+      Momentum                    Second Order Upwind   
+      Turbulent Kinetic Energy    Second Order Upwind   
+      Specific Dissipation Rate   Second Order Upwind   
 
    Solution Limits
 
-      Quantity                         Limit   
-      --------------------------------------
-      Minimum Absolute Pressure [Pa]   1       
-      Maximum Absolute Pressure [Pa]   5e+10   
-      Minimum Static Temperature [K]   1       
-      Maximum Static Temperature [K]   5000    
+      Quantity                                 Limit    
+      -----------------------------------------------
+      Minimum Absolute Pressure [Pa]           1        
+      Maximum Absolute Pressure [Pa]           5e+10    
+      Minimum Static Temperature [K]           1        
+      Maximum Static Temperature [K]           5000     
+      Minimum Turb. Kinetic Energy [m^2/s^2]   1e-14    
+      Minimum Spec. Dissipation Rate [s^-1]    1e-20    
+      Maximum Turb. Viscosity Ratio            100000   
 
 </SolverSettings>
 

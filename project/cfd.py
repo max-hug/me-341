@@ -22,7 +22,7 @@ def parse_input(array_str):
     return np.array(numbers, dtype=float)
 
 # Read the CSV
-df = pd.read_csv('output_cleaned.csv', header=None)
+df = pd.read_csv('testing_data_points.csv', header=None)
 
 # Convert the strings to actual NumPy arrays
 # Apply the function to each row
@@ -55,7 +55,7 @@ for dvs in dvs_list:
 
     padded_dp =  [*dvs, *([0.0] * (max_length - len(dvs))), *report]
     data.append(padded_dp)
-    np.savetxt('cfd_data.csv', data, delimiter=',')
+    np.savetxt('cfd_data_test_points.csv', data, delimiter=',')
     print("Run {} Complete, data added = {:.3f}, {:.3f}".format(num, data[-1][-2], data[-1][-1]))
 
     num+=1

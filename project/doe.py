@@ -5,15 +5,15 @@ import generation
 import csv
 
 filtered_overall = []
-for num_slats in range(5,13):
-    lower_bounds = np.array([2.15] * num_slats + [0.7/num_slats] + [0, 0.5, 0.12, 0.1, 0.01])
+for num_slats in range(5,11):
+    lower_bounds = np.array([1] * num_slats + [0.6/num_slats] + [0, 0.5, 0.12, 0.1, 0.01])
     upper_bounds = np.array([3.5] + [np.pi] * (num_slats-1) + [1.25/num_slats] + [0.5, 1, 0.3, 0.25, 0.2])  # upper bounds
 
     #lower_bounds = np.array([0.5] * num_slats + [0] * 5 + [-20])  # lower bounds
     #upper_bounds = np.array([3.14159] * num_slats + [1.0] * 5 + [20])  # upper bounds
 
     num_factors = len(lower_bounds)  # 20 factors
-    num_samples = 25
+    num_samples = 2
 
     lhs_samples = lhs(num_factors, samples=num_samples)
 
@@ -43,10 +43,10 @@ for num_slats in range(5,13):
         passed = angle > 0 and frame > 0 and slat > 0 and min_reflex > 0 and max_reflex > 0 and connector_length > 0
 
         
-        if passed:
+        #if passed:
             #print(angle, frame, slat, reflex)
         # print(doe_sample)
-            [airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, doe_sample[0:num_slats], True)
+            #[airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, doe_sample[0:num_slats], True)
         
         return passed
 
@@ -68,7 +68,7 @@ for num_slats in range(5,13):
     print(str(num_slats) + " is done")
 
 # Save to CSV
-with open("output.csv", "w", newline="") as file:
+with open("testing_data_points2.csv", "w", newline="") as file:
     writer = csv.writer(file)
     writer.writerows(filtered_overall)
 

@@ -65,6 +65,15 @@ def generate_te(control_points, slat_length, num_slats):
 
 ### MAIN FUNCTIONS ###
 
+def add_points(coords, num_points):
+    num_points/=2
+    airfoil_x = coords[0]
+    airfoil_y = coords[1]
+    while(len(airfoil_x) < num_points):
+        airfoil_x = np.insert(airfoil_x, len(airfoil_x)-1, (airfoil_x[-2]+airfoil_x[-1])/2.0)
+        airfoil_y = np.insert(airfoil_y, len(airfoil_y)-1, (airfoil_y[-2]+airfoil_y[-1])/2.0)
+    return np.array([airfoil_x, airfoil_y])
+
 def generate_airfoil(frame_control, slat_length, slat_angles, plot):
 
     num_slats = len(slat_angles)
@@ -95,6 +104,18 @@ def generate_airfoil(frame_control, slat_length, slat_angles, plot):
         axs.legend()
         plt.show()
 
-    return [[np.array(airfoil_x), np.array(airfoil_y)], slats_used ]
+    return [[np.array(airfoil_x), np.array(airfoil_y)], slats_used]
+
+def opt_generate(x, plot=False):
+    zeros = np.count_nonzero(x == 0)
+    num_slats = len(x) - zeros - 6
+    num_factors = len(x)
+    frame_x_control = [0, x[num_factors-zeros-5], x[num_factors-zeros-4], 1]
+    frame_y_control = [x[num_factors-zeros-3], x[num_factors-zeros-2], x[num_factors-zeros-1], 0]
+    frame_control = [frame_x_control, frame_y_control]
+    slat_length = x[num_slats]
+
+    [airfoil_x, airfoil_y], te_slats_used = generate_airfoil(frame_control, slat_length, x[0:num_slats], plot)
+    return [airfoil_x, airfoil_y], te_slats_used, frame_control, num_slats, slat_length, x[0:num_slats]
 
 

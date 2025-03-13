@@ -1,4 +1,5 @@
 import numpy as np
+import generation
 from shapely.geometry import Point, Polygon
 
 ### HELPER FUNCTIONS ###
@@ -24,7 +25,7 @@ def find_angle(points):
 
 ### MAIN FUNCTIONS ###
 
-def angle_constraint(airfoil_coords):
+def angle(airfoil_coords):
 
     max_angle = -10
 
@@ -35,7 +36,7 @@ def angle_constraint(airfoil_coords):
 
     return -max_angle
 
-def frame_constraint(airfoil_coords, frame_control):
+def frame(airfoil_coords, frame_control):
 
     frame_control = np.array(frame_control)
 
@@ -54,14 +55,14 @@ def frame_constraint(airfoil_coords, frame_control):
 
     return -sum(not polygon.contains(Point(p)) for p in frame_samples)/20.0 # 20 since 20 samples
 
-def te_slat_constraint(slats_used, slat_angles):
+def te_slat(slats_used, slat_angles):
     num_slats = len(slat_angles)
     return 1.0*(slats_used-num_slats)/num_slats
 
-def max_reflex_constraint(slat_angles):
+def max_reflex(slat_angles):
     return 3*np.pi/2 - sum(np.pi-np.array(slat_angles))
 
-def min_reflex_constraint(slat_angles):
+def min_reflex(slat_angles):
     return sum(np.pi-np.array(slat_angles)) - 3*np.pi/4
 
 def connector_length(airfoil_coords, slat_angles, slat_length):
@@ -70,3 +71,27 @@ def connector_length(airfoil_coords, slat_angles, slat_length):
     point2 = np.array(airfoil_coords[0][num_slats+1], airfoil_coords[1][num_slats+1])
     dist = np.linalg.norm(point2-point1)
     return 6*slat_length - dist
+
+def angle_opt(x):
+    airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)
+    return angle(airfoil_coords)
+
+def frame_opt(x):
+    airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)
+    return frame(airfoil_coords, frame_control)
+
+def te_slat_opt(x):
+    airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)
+    return te_slat(te_slats_used, slat_angles)
+
+def max_reflex_opt(x):
+    airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)
+    return max_reflex(slat_angles)
+
+def min_reflex_opt(x):
+    airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)
+    return min_reflex(slat_angles)
+
+def connector_length_opt(x):
+    airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)
+    return connector_length(airfoil_coords, slat_angles, slat_length)

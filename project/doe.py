@@ -30,11 +30,11 @@ for num_slats in range(5,11):
 
         #print(frame_control)
         [airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, doe_sample[0:num_slats], False)
-        angle = constraints.angle_constraint([airfoil_x, airfoil_y]) + tol
-        frame = constraints.frame_constraint([airfoil_x, airfoil_y], frame_control) + tol
-        slat = constraints.te_slat_constraint(te_slats_used, doe_sample[0:num_slats]) + tol
-        min_reflex = constraints.min_reflex_constraint(doe_sample[0:num_slats]) + tol
-        max_reflex = constraints.max_reflex_constraint(doe_sample[0:num_slats]) + tol
+        angle = constraints.angle([airfoil_x, airfoil_y]) + tol
+        frame = constraints.frame([airfoil_x, airfoil_y], frame_control) + tol
+        slat = constraints.te_slat(te_slats_used, doe_sample[0:num_slats]) + tol
+        min_reflex = constraints.min_reflex(doe_sample[0:num_slats]) + tol
+        max_reflex = constraints.max_reflex(doe_sample[0:num_slats]) + tol
         connector_length = constraints.connector_length([airfoil_x, airfoil_y], doe_sample[0:num_slats], slat_length) + tol
 
         frame = 1

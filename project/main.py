@@ -19,10 +19,5 @@ frame_control = [frame_x_control, frame_y_control]
 
 
 
-[airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, slat_angles, False)
-
-export_airfoil = np.array([airfoil_x, airfoil_y]).T
-
-np.savetxt('airfoil.txt', export_airfoil, delimiter=',', fmt='%.3f', header='', comments='')
-
+[airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, slat_angles, True)
 

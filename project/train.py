@@ -38,20 +38,12 @@ filtered_samples = filtered_samples[:, 0:18]
 
 coords = []
 for trial in filtered_samples:
-    [airfoil_x, airfoil_y], te_slats_used, frame_control = quick_generate(trial)
-    inter = []
-    for i in range(len(airfoil_x)):
-        inter.append(airfoil_x[i])
-        inter.append(airfoil_y[i])
-    while len(inter) != 54:
-        avg_x = (inter[-2] + inter[-4])/2
-        avg_y = (inter[-1] + inter[-3])/2
-        inter.insert(-3, avg_x)
-        inter.insert(-3, avg_y)
-    inter = np.array(inter)
-    coords.append(inter)
+    [airfoil_x, airfoil_y], te_slats_used, frame_control, _, _, _ = generation.opt_generate(trial)
+    inter = generation.add_points([airfoil_x, airfoil_y], 54)
+    input = np.array([j for i in zip(inter[0],inter[1]) for j in i])
+    coords.append(input)
 
-X_train = coords  
+X_train = coords
 
 # Define Kriging (Gaussian Process) model
 kernel1 = C(1.0) * RBF(length_scale=1.0)  # RBF Kernel with automatic tuning
@@ -67,7 +59,10 @@ joblib.dump(gp_lift, "lift_coords.joblib")
 joblib.dump(gp_drag, "drag_coords.joblib")
 
 coords = np.array(coords)
-drag_pred, _ = gp_drag.predict(coords[10].reshape(1,-1), return_std = True)
+input = coords[10].reshape(1,-1)
+print(input)
+
+drag_pred, _ = gp_drag.predict(input, return_std = True)
 print('Prediction: ' + str(drag_pred) + ', Actual: ' + str(drag[10]))
 
 print("models trained")

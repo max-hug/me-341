@@ -28,10 +28,11 @@ def find_angle(points):
     return angle 
 
 def quick_generate(x):
-    num_slats = 12
+    zeros = np.count_nonzero(x == 0)
+    num_slats = 12 - zeros
     num_factors = len(x)
-    frame_x_control = [0, x[num_factors-5], x[num_factors-4], 1]
-    frame_y_control = [x[num_factors-3], x[num_factors-2], x[num_factors-1], 0]
+    frame_x_control = [0, x[num_factors-zeros-5], x[num_factors-zeros-4], 1]
+    frame_y_control = [x[num_factors-zeros-3], x[num_factors-zeros-2], x[num_factors-zeros-1], 0]
     frame_control = [frame_x_control, frame_y_control]
     slat_length = x[num_slats]
 
@@ -141,10 +142,26 @@ print("CSV data loaded:")
 
 filtered_samples = filtered_samples[:, 0:18]
 
+coords = []
+for trial in filtered_samples:
+    [airfoil_x, airfoil_y], te_slats_used, frame_control = quick_generate(trial)
+    inter = []
+    for i in range(len(airfoil_x)):
+        inter.append(airfoil_x[i])
+        inter.append(airfoil_y[i])
+    while len(inter) != 54:
+        avg_x = (inter[-2] + inter[-4])/2
+        avg_y = (inter[-1] + inter[-3])/2
+        inter.insert(-3, avg_x)
+        inter.insert(-3, avg_y)
+    coords.append(inter)
+
 X_train = filtered_samples   
 
-gp_lift = joblib.load("lift.joblib")
-gp_drag = joblib.load("drag.joblib")
+gp_lift = joblib.load("lift_coords.joblib")
+gp_drag = joblib.load("drag_coords.joblib")
+
+coords = np.array(coords)
 
 num_slats = 12
 
@@ -153,9 +170,19 @@ constraints_list = [{'type': 'ineq', 'fun': angle_constraint}, {'type': 'ineq', 
 
 # Define the surrogate-based objective function (Cl/Cd Maximization)
 def surrogate_objective(x):
-    x = x.reshape(1,-1)
-    lift_pred, _ = gp_lift.predict(x, return_std=True)
-    drag_pred, _ = gp_drag.predict(x, return_std = True)
+    [airfoil_x, airfoil_y], te_slats_used, frame_control = quick_generate(x)
+    inter = []
+    for i in range(len(airfoil_x)):
+        inter.append(airfoil_x[i])
+        inter.append(airfoil_y[i])
+    while len(inter) != 54:
+        avg_x = (inter[-2] + inter[-4])/2
+        avg_y = (inter[-1] + inter[-3])/2
+        inter.insert(-3, avg_x)
+        inter.insert(-3, avg_y)
+    inter = np.array(inter)
+    lift_pred, _ = gp_lift.predict(inter.reshape(1,-1), return_std=True)
+    drag_pred, _ = gp_drag.predict(inter.reshape(1,-1), return_std = True)
     return -1*lift_pred/drag_pred  # Negative because we minimize in SciPy
 
 lower_bounds = np.array([2.15] * num_slats + [0.7/num_slats] + [0, 0.5, 0.12, 0.1, 0.01])
@@ -167,7 +194,7 @@ for i in range(len(lower_bounds)):
 
 # Perform optimization using surrogate model
 min_val = 0
-for IC in range(len(X_train)):
+for IC in range(175,200):
     result = minimize(surrogate_objective, X_train[IC], method='SLSQP', bounds=bounds, constraints = constraints_list, tol = 1e-4)
     val = surrogate_objective(result.x)
     if val < min_val:
@@ -184,8 +211,6 @@ slat_length = optimal_design[num_slats]
 
 #print(frame_control)
 [airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, optimal_design[0:num_slats], True)
-
-
 
 
 

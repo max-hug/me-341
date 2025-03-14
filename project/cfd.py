@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
+import csv
 import re
 from pyansys import __version__
 
@@ -9,26 +9,20 @@ from ansys.workbench.core import launch_workbench
 import generation
 import constraints
 
-wb = launch_workbench(show_gui=True, version="251")
-wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\open.wbjn")
+#wb = launch_workbench(show_gui=True, version="251")
+#wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\open.wbjn")
 
 data = []
 
-# Function to convert string array to a NumPy array
-def parse_input(array_str):
-    # Remove brackets and extra spaces, then split numbers
-    numbers = re.findall(r"[-+]?\d*\.\d+|\d+", array_str)
-    # Convert to floats and create a NumPy array
-    return np.array(numbers, dtype=float)
+# Read the CSV file
+with open("doe_v2.csv", "r") as file:
+    reader = csv.reader(file)
+    dvs_list = [list(map(str, row)) for row in reader]  # Change `str` to `float` if numbers
+dvs_list= np.array(dvs_list, dtype = float)
+print("CSV data loaded:")
+dvs_list = [row[row != 0].tolist() for row in dvs_list]
 
-# Read the CSV
-df = pd.read_csv('testing_data_points.csv', header=None)
-
-# Convert the strings to actual NumPy arrays
-# Apply the function to each row
-dvs_list = [parse_input(row[0]) for _, row in df.iterrows()]
-
-max_length = max(len(row) for row in dvs_list)
+max_length= 18
 
 num = 1
 
@@ -48,20 +42,20 @@ for dvs in dvs_list:
     export_airfoil = np.array([airfoil_x, airfoil_y]).T
     np.savetxt('airfoil.txt', export_airfoil, delimiter=',', fmt='%.3f', header='', comments='')
 
-    wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\update.wbjn")
+    #wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\update.wbjn")
 
     with open("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\dp_data.csv", "r", encoding="utf-8-sig") as f:
         report = np.loadtxt(f, delimiter=',', usecols=(1, 2, ), skiprows=7)
 
     padded_dp =  [*dvs, *([0.0] * (max_length - len(dvs))), *report]
     data.append(padded_dp)
-    np.savetxt('cfd_data_test_points.csv', data, delimiter=',')
+    np.savetxt('cfd_data_v3.csv', data, delimiter=',')
     print("Run {} Complete, data added = {:.3f}, {:.3f}".format(num, data[-1][-2], data[-1][-1]))
 
     num+=1
 
-wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\close.wbjn")
-wb.exit()
+#wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\close.wbjn")
+#wb.exit()
 
 
 

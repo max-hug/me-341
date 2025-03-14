@@ -63,7 +63,7 @@ for IC in range(175,199):
     bounds = zip(lower_bound, upper_bound)
 
     # SLSQP, COBYQA, trust-constr
-    result = minimize(surrogate_objective, ics[IC], method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':1000})
+    result = minimize(surrogate_objective, ics[IC], method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000})
     print(result.message)
 
     val = surrogate_objective(result.x)

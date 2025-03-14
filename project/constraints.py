@@ -60,7 +60,7 @@ def te_slat(slats_used, slat_angles):
     return 1.0*(slats_used-num_slats)/num_slats
 
 def max_reflex(slat_angles):
-    return 3*np.pi/2 - sum(np.pi-np.array(slat_angles))
+    return 5*np.pi/4 - sum(np.pi-np.array(slat_angles))
 
 def min_reflex(slat_angles):
     return sum(np.pi-np.array(slat_angles)) - 3*np.pi/4
@@ -70,7 +70,7 @@ def connector_length(airfoil_coords, slat_angles, slat_length):
     point1 = np.array(airfoil_coords[0][num_slats], airfoil_coords[1][num_slats])
     point2 = np.array(airfoil_coords[0][num_slats+1], airfoil_coords[1][num_slats+1])
     dist = np.linalg.norm(point2-point1)
-    return 6*slat_length - dist
+    return 7*slat_length - dist
 
 def angle_opt(x):
     airfoil_coords, te_slats_used, frame_control, num_slats, slat_length, slat_angles = generation.opt_generate(x)

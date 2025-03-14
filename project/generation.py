@@ -69,9 +69,15 @@ def add_points(coords, num_points):
     num_points/=2
     airfoil_x = coords[0]
     airfoil_y = coords[1]
+
+    index = 1
+
     while(len(airfoil_x) < num_points):
-        airfoil_x = np.insert(airfoil_x, len(airfoil_x)-1, (airfoil_x[-2]+airfoil_x[-1])/2.0)
-        airfoil_y = np.insert(airfoil_y, len(airfoil_y)-1, (airfoil_y[-2]+airfoil_y[-1])/2.0)
+        airfoil_x = np.insert(airfoil_x, index, (airfoil_x[index-1]+airfoil_x[index])/2.0)
+        airfoil_y = np.insert(airfoil_y, index, (airfoil_y[index-1]+airfoil_y[index])/2.0)
+        index += 1
+        if index == len(airfoil_x):
+            index = 1
     return np.array([airfoil_x, airfoil_y])
 
 def generate_airfoil(frame_control, slat_length, slat_angles, plot):

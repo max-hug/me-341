@@ -27,13 +27,16 @@ def surrogate_objective(x):
     inter = generation.add_points([airfoil_x, airfoil_y], 54)
     input = np.array([j for i in zip(inter[0],inter[1]) for j in i])
     input = input.reshape(1,-1)
-    lift_pred, _ = gp_lift.predict(input, return_std=True)
-    drag_pred, _ = gp_drag.predict(input, return_std=True)
+    lift_pred, lift_sd = gp_lift.predict(input, return_std=True)
+    drag_pred, drag_sd = gp_drag.predict(input, return_std=True)
 
-    if abs(drag_pred) < 1e-6:
-        res = 0
-    else:
-        res = -1*lift_pred/drag_pred  # Negative because we minimize in SciPy
+    res = -1*(lift_pred-2*lift_sd)/(drag_pred+2*drag_sd)  # Negative because we minimize in SciPy
+
+    if abs(drag_pred) < 250 or abs(lift_pred) > 50000:
+        res /= 10
+
+    if abs(res) > 150:
+        res /= 100
 
     return res
 
@@ -44,14 +47,14 @@ gp_drag = joblib.load("drag_coords.joblib")
 constraints_list = [{'type': 'ineq', 'fun': constraints.angle_opt}, 
                     {'type': 'ineq', 'fun': constraints.frame_opt}, 
                     {'type': 'ineq', 'fun': constraints.te_slat_opt}, 
-                    {'type': 'ineq', 'fun': constraints.max_reflex_opt}, 
-                    {'type': 'ineq', 'fun': constraints.min_reflex_opt}, 
+                    {'type': 'ineq', 'fun': constraints.max_reflex_opt, 'hess':0}, 
+                    {'type': 'ineq', 'fun': constraints.min_reflex_opt, 'hess':0}, 
                     {'type': 'ineq', 'fun': constraints.connector_length_opt}]
 
 
 # Perform optimization using surrogate model
 print("Beginning Optimization")
-min_val = 1
+min_val = 100
 optimal_result = -1
 optimal_ic = []
 
@@ -63,22 +66,22 @@ for IC in range(175,199):
     bounds = zip(lower_bound, upper_bound)
 
     # SLSQP, COBYQA, trust-constr
-    result = minimize(surrogate_objective, ics[IC], method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000})
+    result = minimize(surrogate_objective, ics[IC], method='SLSQP', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000})
     print(result.message)
 
     val = surrogate_objective(result.x)
-    if val < min_val:
+    if  val < min_val:
         min_val = val
         optimal_result = result
         optimal_ic = ics[IC]
 
-print(optimal_ic)
+print(optimal_result.x)
 
-print(surrogate_objective(result.x))
+print(surrogate_objective(optimal_result.x))
 print(surrogate_objective(optimal_ic))
 
 
-generation.opt_generate(result.x, True)
+generation.opt_generate(optimal_result.x, True)
 generation.opt_generate(optimal_ic, True)
 
 

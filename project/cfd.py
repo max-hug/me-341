@@ -9,8 +9,8 @@ from ansys.workbench.core import launch_workbench
 import generation
 import constraints
 
-#wb = launch_workbench(show_gui=True, version="251")
-#wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\open.wbjn")
+wb = launch_workbench(show_gui=True, version="251")
+wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\open.wbjn")
 
 data = []
 
@@ -42,7 +42,7 @@ for dvs in dvs_list:
     export_airfoil = np.array([airfoil_x, airfoil_y]).T
     np.savetxt('airfoil.txt', export_airfoil, delimiter=',', fmt='%.3f', header='', comments='')
 
-    #wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\update.wbjn")
+    wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\update.wbjn")
 
     with open("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\dp_data.csv", "r", encoding="utf-8-sig") as f:
         report = np.loadtxt(f, delimiter=',', usecols=(1, 2, ), skiprows=7)
@@ -54,8 +54,8 @@ for dvs in dvs_list:
 
     num+=1
 
-#wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\close.wbjn")
-#wb.exit()
+wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\close.wbjn")
+wb.exit()
 
 
 

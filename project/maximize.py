@@ -74,7 +74,8 @@ for IC in range(175,199):
     print(result.message)
 
     val = surrogate_objective(result.x)
-    if  val < min_val:
+    if  val < min_val and result.message == "`xtol` termination condition is satisfied.":
+        print("new min\n\n\n\n")
         min_val = val
         optimal_result = result
         optimal_ic = ics[IC]

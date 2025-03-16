@@ -23,26 +23,27 @@ def load_ics(file_name):
 
 # Define the surrogate-based objective function (Cl/Cd Maximization)
 def surrogate_objective(x):
-    [airfoil_x, airfoil_y], te_slats_used, frame_control, _, _, _ = generation.opt_generate(x)
-    inter = generation.add_points([airfoil_x, airfoil_y], 54)
-    input = np.array([j for i in zip(inter[0],inter[1]) for j in i])
-    input = input.reshape(1,-1)
+    gp_input_dim = 18
+
+    x = np.insert(x, len(x) - 6, np.zeros(18-len(x)))
+
+    input = np.concatenate((x, np.zeros(18-len(x)))).reshape(1,-1)
     lift_pred, lift_sd = gp_lift.predict(input, return_std=True)
     drag_pred, drag_sd = gp_drag.predict(input, return_std=True)
 
-    res = -1*(lift_pred-2*lift_sd)/(drag_pred+2*drag_sd)  # Negative because we minimize in SciPy
+    res = -1*(lift_pred-0.1*lift_sd)/(drag_pred+0.1*drag_sd)  # Negative because we minimize in SciPy
 
     if abs(drag_pred) < 250 or abs(lift_pred) > 50000:
-        res /= 10
+        res = 0
 
     if abs(res) > 150:
-        res /= 100
+        res = 0
 
     return res
 
 ics = load_ics("cfd_data.csv")
-gp_lift = joblib.load("lift_coords.joblib")
-gp_drag = joblib.load("drag_coords.joblib")
+gp_lift = joblib.load("lift_dvs.joblib")
+gp_drag = joblib.load("drag_dvs.joblib")
 
 constraints_list = [{'type': 'ineq', 'fun': constraints.angle_opt}, 
                     {'type': 'ineq', 'fun': constraints.frame_opt}, 
@@ -61,12 +62,15 @@ optimal_ic = []
 for IC in range(175,199):
 
     num_slats = len(ics[IC]) - np.count_nonzero(ics[IC] == 0) - 6
+
     lower_bound = np.array([2.15] * num_slats + [0.7/num_slats] + [0, 0.5, 0.12, 0.1, 0.01])
     upper_bound = np.array([3.5] + [np.pi] * (num_slats-1) + [1.25/num_slats] + [0.5, 1, 0.3, 0.25, 0.2]) 
     bounds = zip(lower_bound, upper_bound)
 
+    ic = ics[IC][0:num_slats+6]
+
     # SLSQP, COBYQA, trust-constr
-    result = minimize(surrogate_objective, ics[IC], method='SLSQP', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000})
+    result = minimize(surrogate_objective, ic, method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000})
     print(result.message)
 
     val = surrogate_objective(result.x)

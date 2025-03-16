@@ -17,7 +17,7 @@ def constraints_combined(doe_sample, num_factors, num_slats):
     tol = 1.5e-1
 
     #print(frame_control)
-    [airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, doe_sample[0:num_slats], False)
+    [airfoil_x, airfoil_y], te_slats_used = generation.generate_airfoil(frame_control, slat_length, doe_sample[0:num_slats], True)
     angle = constraints.angle([airfoil_x, airfoil_y]) + tol
     frame = constraints.frame([airfoil_x, airfoil_y], frame_control) + tol
     slat = constraints.te_slat(te_slats_used, doe_sample[0:num_slats]) + tol
@@ -59,7 +59,6 @@ for num_slats in range(10,11):
         for doe_sample in doe_samples:
             if(num_generated <= num_samples and constraints_combined(doe_sample,num_factors,num_slats)):
                 num_generated+=1
-
                 padded_sample = [*doe_sample, *([0.0] * (max_length - len(doe_sample)))]
                 doe_points.append(padded_sample)
                 np.savetxt('doe_v3.csv', doe_points, delimiter=',')

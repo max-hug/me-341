@@ -6,6 +6,8 @@ import joblib
 import generation
 import csv
 import constraints
+import matplotlib.pyplot as plt
+
 
 def load_ics(file_name):
     # Read the CSV file
@@ -20,6 +22,7 @@ def load_ics(file_name):
     dvs = filtered_samples[:, 0:18]
 
     return np.array(dvs)
+
 
 # Define the surrogate-based objective function (Cl/Cd Maximization)
 def surrogate_objective(x):
@@ -59,8 +62,9 @@ min_val = 100
 optimal_result = -1
 optimal_ic = []
 
+history = []
 for IC in range(175,199):
-
+    
     num_slats = len(ics[IC]) - np.count_nonzero(ics[IC] == 0) - 6
 
     lower_bound = np.array([2.15] * num_slats + [0.7/num_slats] + [0, 0.5, 0.12, 0.1, 0.01])
@@ -68,23 +72,35 @@ for IC in range(175,199):
     bounds = zip(lower_bound, upper_bound)
 
     ic = ics[IC][0:num_slats+6]
-
+    history_new = []
     # SLSQP, COBYQA, trust-constr
-    result = minimize(surrogate_objective, ic, method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000})
+    def call(*,intermediate_result):
+        history_new.append(-1*intermediate_result.fun)
+    result = minimize(surrogate_objective, ic, method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000}, callback = call)
     print(result.message)
 
     val = surrogate_objective(result.x)
-    if  val < min_val and result.message == "`xtol` termination condition is satisfied.":
+    if  val < min_val:
         print("new min\n\n\n\n")
         min_val = val
         optimal_result = result
         optimal_ic = ics[IC]
+        history = np.array(history_new)
 
 print(optimal_result.x)
 
 print(surrogate_objective(optimal_result.x))
 print(surrogate_objective(optimal_ic))
 
+print(history)
+
+plt.figure()
+plt.title('Objective Function Convergence')
+plt.xlabel('Iteration')
+plt.ylabel('Objective Function Value')
+plt.grid()
+plt.plot(history)
+plt.show()
 
 generation.opt_generate(optimal_result.x, True)
 generation.opt_generate(optimal_ic, True)

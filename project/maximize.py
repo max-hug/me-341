@@ -34,7 +34,7 @@ def surrogate_objective(x):
     lift_pred, lift_sd = gp_lift.predict(input, return_std=True)
     drag_pred, drag_sd = gp_drag.predict(input, return_std=True)
 
-    res = -1*(lift_pred-0.1*lift_sd)/(drag_pred+0.1*drag_sd)  # Negative because we minimize in SciPy
+    res = -1*(lift_pred-0.0*lift_sd)/(drag_pred+0.0*drag_sd)  # Negative because we minimize in SciPy
 
     if abs(drag_pred) < 250 or abs(lift_pred) > 50000:
         res = 0
@@ -58,9 +58,12 @@ constraints_list = [{'type': 'ineq', 'fun': constraints.angle_opt},
 
 # Perform optimization using surrogate model
 print("Beginning Optimization")
-min_val = 100
-optimal_result = -1
-optimal_ic = []
+optimal_obj = [0] * 8  # 5-12 + 1
+optimal_vals = [0] * 8
+optimal_ics = [0] * 8
+ics_obj = [0] * 8 
+
+print(optimal_obj)
 
 history = []
 for IC in range(175,199):
@@ -73,26 +76,21 @@ for IC in range(175,199):
 
     ic = ics[IC][0:num_slats+6]
     history_new = []
-    # SLSQP, COBYQA, trust-constr
     def call(*,intermediate_result):
         history_new.append(-1*intermediate_result.fun)
-    result = minimize(surrogate_objective, ic, method='trust-constr', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000}, callback = call)
+
+    # SLSQP, COBYQA, trust-constr
+    result = minimize(surrogate_objective, ic, method='COBYQA', bounds=bounds, constraints = constraints_list, tol = 1e-3, options={'maxiter':10000}, callback = call)
     print(result.message)
 
     val = surrogate_objective(result.x)
-    if  val < min_val:
-        print("new min\n\n\n\n")
-        min_val = val
-        optimal_result = result
-        optimal_ic = ics[IC]
+    if  val < optimal_obj[num_slats-5]:
+        optimal_obj[num_slats-5] = val
+        optimal_vals[num_slats-5] = result.x
+        optimal_ics[num_slats-5] = ic
+        ics_obj[num_slats-5] = surrogate_objective(ic)
+        print(optimal_obj)
         history = np.array(history_new)
-
-print(optimal_result.x)
-
-print(surrogate_objective(optimal_result.x))
-print(surrogate_objective(optimal_ic))
-
-print(history)
 
 plt.figure()
 plt.title('Objective Function Convergence')
@@ -102,10 +100,21 @@ plt.grid()
 plt.plot(history)
 plt.show()
 
-generation.opt_generate(optimal_result.x, True)
-generation.opt_generate(optimal_ic, True)
 
 
 
+output = [0] * len(optimal_obj)
+
+generation.opt_generate(optimal_vals[-1], True)
+
+for i in range (0,len(output)):
+    output[i] = [optimal_obj[i], *optimal_vals[i], ics_obj[i], *optimal_ics[i]]
+
+# Writing to a CSV file
+#with open("exaustive.csv", "w", newline="") as file:
+#    writer = csv.writer(file)
+#    writer.writerows(output)
+
+#print("CSV file created successfully!")
 
 

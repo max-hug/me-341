@@ -6,6 +6,8 @@ import csv
 import generation
 import constraints
 
+'''
+
 gp_lift = joblib.load("lift_dvs.joblib")
 gp_drag = joblib.load("drag_dvs.joblib")
 
@@ -49,5 +51,10 @@ for i in range(0,len(filtered_samples_test)):
 
     drag_pred, drag_sd = gp_drag.predict(input, return_std = True)
     lift_pred, lift_sd = gp_lift.predict(input, return_std = True)
-    #print('Prediction: ' + str(drag_pred) + ', Actual: ' + str(drag), ', SD: ' + str(drag_sd))
-    print('Prediction: ' + str(lift_pred) + ', Actual: ' + str(lift),  ', SD: ' + str(lift_sd))
+    print(str(drag_pred[0]) + ',' + str(drag), ',' + str(drag_sd[0]))
+    #print(str(lift_pred[0]) + ',' + str(lift),  ',' + str(lift_sd[0]))'
+'''
+
+ic = [2.7785957722836656,2.869702437813008,2.937310499230347,2.452638344696131,2.350585268308038,2.8487823782943336,3.071301432399086,2.868027423891672,2.9757029413957556,3.0701658824999307,0.10346346003128647,0.05968282239165634,0.7268866680109716,0.2864479408030815,0.24341744108709434,0.17468439602989003]
+
+generation.opt_generate(ic, True)

@@ -1,4 +1,4 @@
-Transcript Start Time:  03:34:22, 14 Mar 2025 Central Daylight Time 
+Transcript Start Time:  12:59:12, 17 Mar 2025 Central Daylight Time 
 Current Directory: "C:\WINDOWS\system32"
 
 Build Time: Nov 26 2024 13:27:40 EST 
@@ -7,35 +7,35 @@ Executable Path: C:/PROGRA~1/ANSYSI~1/ANSYSS~1/v251/fluent/ntbin/win64/fluent.ex
 ------------------------------------------------------------------------------------
 ID    Hostname         Core  O.S.         PID    Vendor                            
 ------------------------------------------------------------------------------------
-n3    DESKTOP-ETFE2PJ  4/22  Windows-x64  31716  Intel(R) Core(TM) Ultra 9 185H    
-n2    DESKTOP-ETFE2PJ  3/22  Windows-x64  40524  Intel(R) Core(TM) Ultra 9 185H    
-n1    DESKTOP-ETFE2PJ  2/22  Windows-x64  30092  Intel(R) Core(TM) Ultra 9 185H    
-n0*   DESKTOP-ETFE2PJ  1/22  Windows-x64  12124  Intel(R) Core(TM) Ultra 9 185H    
-host  DESKTOP-ETFE2PJ        Windows-x64  34152  Intel(R) Core(TM) Ultra 9 185H    
+n3    DESKTOP-ETFE2PJ  4/22  Windows-x64  45036  Intel(R) Core(TM) Ultra 9 185H    
+n2    DESKTOP-ETFE2PJ  3/22  Windows-x64  39556  Intel(R) Core(TM) Ultra 9 185H    
+n1    DESKTOP-ETFE2PJ  2/22  Windows-x64  28576  Intel(R) Core(TM) Ultra 9 185H    
+n0*   DESKTOP-ETFE2PJ  1/22  Windows-x64  34968  Intel(R) Core(TM) Ultra 9 185H    
+host  DESKTOP-ETFE2PJ        Windows-x64  37468  Intel(R) Core(TM) Ultra 9 185H    
 
 MPI Option Selected: intel
 Selected system interconnect: default
 ------------------------------------------------------------------------------------
 
-Cortex Process ID: 34584 
+Cortex Process ID: 12828 
 License Server Path: () 
 Note: Rank = 0: Process affinity not being set (6).
 Note: Rank = 1: Process affinity not being set (6).
 Note: Rank = 2: Process affinity not being set (6).
 Note: Rank = 3: Process affinity not being set (6).
 Reading setting file in cache: "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\FFF.1.set"
-Reading "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\MECH\FFF.1.msh"...
+Reading "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\MECH\FFF.msh"...
 Buffering for file scan...
 
-    4909 nodes, binary.
-     528 nodes, binary.
-   10096 2D interior faces, zone  1, binary.
+    4995 nodes, binary.
+     511 nodes, binary.
+   10257 2D interior faces, zone  1, binary.
      100 2D velocity-inlet faces, zone  5, binary.
       50 2D pressure-outlet faces, zone  6, binary.
-     256 2D wall faces, zone  7, binary.
+     239 2D wall faces, zone  7, binary.
       61 2D wall faces, zone  8, binary.
       61 2D wall faces, zone  9, binary.
-    5187 mixed cells, zone  4, binary.
+    5262 mixed cells, zone  4, binary.
 
 
 
@@ -50,7 +50,7 @@ Building...
 		faces....,
 		nodes....,
 		cells....,
-        bandwidth reduction using Reverse Cuthill-McKee: 1296/47 = 27.5745
+        bandwidth reduction using Reverse Cuthill-McKee: 1317/65 = 20.2615
      materials,
      interface,
      domains,
@@ -92,7 +92,7 @@ Done.
 Setting Post Processing and Surfaces information ...	 Done.
 "Updating Setup cell..."
 "Updating Solution cell..."
-Reading C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_files\\dp0\\FFF\\Fluent\\FFF.ip...
+Reading C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_files\\dp0\\FFF\\Fluent\\FFF.1.ip...
 Reading IP data ...
 	x-coord
 	y-coord
@@ -107,94 +107,73 @@ Reading IP data ...
 Fast-loading "C:\PROGRA~1\ANSYSI~1\ANSYSS~1\v251\fluent\fluent25.1.0\\addons\afd\lib\hdfio.bin"
 Done.
 
-Writing to DESKTOP-ETFE2PJ:"C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\FFF.1-Setup-Output.cas.h5" in NODE0 mode and compression level 1 ...
+Writing to DESKTOP-ETFE2PJ:"C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\FFF-Setup-Output.cas.h5" in NODE0 mode and compression level 1 ...
 Grouping cells for Laplace smoothing ...
-        5187 cells,     1 zone  ...
-       10624 faces,     6 zones ...
-        5437 nodes,     1 zone  ...
+        5262 cells,     1 zone  ...
+       10768 faces,     6 zones ...
+        5506 nodes,     1 zone  ...
   Done.
 Done.
 Overwriting "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\drag-rfile.out"  of Report File "drag-rfile"
 Overwriting "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\lift-rfile.out"  of Report File "lift-rfile"
 
   iter  continuity  x-velocity  y-velocity           k       omega     time/iter
-     1  1.0000e+00  1.2998e-03  8.1105e-04  1.1625e-01  1.2566e-02  0:00:18  499
-     2  6.3408e-01  1.1364e-03  7.3056e-04  6.1591e-02  4.7245e-03  0:00:28  498
-     3  3.8837e-01  6.6184e-04  3.9594e-04  3.8269e-02  2.0787e-03  0:00:30  497
-     4  2.4336e-01  4.1968e-04  2.2866e-04  2.8941e-02  1.0511e-03  0:00:41  496
-     5  1.8462e-01  2.8434e-04  1.4503e-04  2.6778e-02  6.4946e-04  0:00:40  495
-     6  1.3958e-01  2.1974e-04  1.0618e-04  2.6961e-02  4.9882e-04  0:00:39  494
-     7  1.0834e-01  1.8783e-04  8.8588e-05  2.7161e-02  4.2963e-04  0:00:39  493
-     8  8.6537e-02  1.7772e-04  7.9410e-05  2.6633e-02  3.7197e-04  0:00:37  492
-     9  7.2149e-02  1.7299e-04  7.1805e-05  2.6625e-02  3.2597e-04  0:00:37  491
-    10  6.4369e-02  1.7167e-04  6.3679e-05  2.6782e-02  3.0375e-04  0:00:36  490
-    11  5.8123e-02  1.6841e-04  5.7385e-05  2.6936e-02  2.8395e-04  0:00:36  489
+     1  1.0000e+00  1.5408e-03  8.6971e-04  1.3281e-01  1.4411e-02  0:00:36  499
+     2  5.9838e-01  1.2324e-03  6.5773e-04  6.2345e-02  5.3945e-03  0:00:49  498
+     3  3.3112e-01  7.0750e-04  3.7085e-04  3.3995e-02  2.2864e-03  0:00:51  497
+     4  2.2131e-01  4.3689e-04  2.1881e-04  2.0170e-02  1.1091e-03  0:01:08  496
+     5  1.6952e-01  2.8688e-04  1.3684e-04  1.5997e-02  6.7713e-04  0:01:07  495
+     6  1.3289e-01  2.1399e-04  1.0069e-04  1.6201e-02  5.1534e-04  0:01:02  494
+     7  1.0270e-01  1.8947e-04  8.5125e-05  1.8202e-02  4.6219e-04  0:01:01  493
+     8  8.1664e-02  1.8440e-04  7.5474e-05  2.0504e-02  4.3410e-04  0:01:01  492
+     9  6.6245e-02  1.8141e-04  6.8245e-05  2.4628e-02  4.1999e-04  0:00:59  491
+    10  5.6759e-02  1.8022e-04  6.9282e-05  2.7671e-02  3.9195e-04  0:00:56  490
+    11  5.2684e-02  1.8390e-04  7.3370e-05  2.8783e-02  3.5989e-04  0:00:54  489
 
   iter  continuity  x-velocity  y-velocity           k       omega     time/iter
-    12  5.2279e-02  1.6184e-04  5.2903e-05  2.7743e-02  2.6449e-04  0:00:35  488
-    13  4.7444e-02  1.5612e-04  5.0982e-05  2.8129e-02  2.4565e-04  0:00:35  487
-    14  4.4407e-02  1.5107e-04  5.0323e-05  2.8011e-02  2.2927e-04  0:00:35  486
-    15  4.2644e-02  1.4660e-04  4.9399e-05  2.7382e-02  2.1883e-04  0:00:35  485
-    16  4.0590e-02  1.4186e-04  4.8480e-05  2.6395e-02  2.0906e-04  0:00:36  484
-    17  3.9623e-02  1.3925e-04  4.8439e-05  2.5021e-02  2.0039e-04  0:00:34  483
-    18  3.8278e-02  1.4019e-04  5.0056e-05  2.3360e-02  2.0063e-04  0:00:35  482
-    19  3.8509e-02  1.4493e-04  5.4363e-05  2.1941e-02  2.0098e-04  0:00:33  481
-    20  4.0850e-02  1.5441e-04  5.9514e-05  2.1441e-02  2.0113e-04  0:00:33  480
-    21  4.3224e-02  1.6594e-04  6.4446e-05  2.1924e-02  2.0045e-04  0:00:33  479
-    22  4.5574e-02  1.7533e-04  6.6953e-05  2.3178e-02  1.9859e-04  0:00:33  478
+    12  4.9169e-02  1.8937e-04  7.5716e-05  2.7633e-02  3.1404e-04  0:00:52  488
+    13  4.5198e-02  1.9076e-04  7.4246e-05  2.7015e-02  2.7112e-04  0:00:51  487
+    14  4.1264e-02  1.8313e-04  6.9117e-05  2.4323e-02  2.3253e-04  0:00:50  486
+    15  3.6835e-02  1.6743e-04  6.1614e-05  2.1187e-02  1.9883e-04  0:00:49  485
+    16  3.2875e-02  1.5101e-04  5.3509e-05  1.8293e-02  1.7170e-04  0:00:50  484
+    17  2.9654e-02  1.3510e-04  4.7374e-05  1.5923e-02  1.4970e-04  0:00:49  483
+    18  2.6742e-02  1.1947e-04  4.2082e-05  1.3708e-02  1.3023e-04  0:00:50  482
+    19  2.3601e-02  1.0652e-04  3.6829e-05  1.1377e-02  1.1367e-04  0:00:49  481
+    20  2.0836e-02  9.4384e-05  3.2286e-05  9.1346e-03  9.8264e-05  0:00:49  480
+    21  1.8437e-02  8.3314e-05  2.8302e-05  7.3488e-03  8.5574e-05  0:00:47  479
+    22  1.5562e-02  7.3423e-05  2.4299e-05  5.7506e-03  7.4435e-05  0:00:48  478
 
   iter  continuity  x-velocity  y-velocity           k       omega     time/iter
-    23  4.6619e-02  1.7768e-04  6.7301e-05  2.3394e-02  1.9224e-04  0:00:33  477
-    24  4.5181e-02  1.7172e-04  6.3607e-05  2.3154e-02  1.9324e-04  0:00:34  476
-    25  4.1351e-02  1.6168e-04  5.8874e-05  2.3271e-02  1.8793e-04  0:00:34  475
-    26  3.8100e-02  1.4744e-04  5.5200e-05  2.4429e-02  1.8602e-04  0:00:34  474
-    27  3.5947e-02  1.3464e-04  5.3738e-05  2.4840e-02  1.7911e-04  0:00:35  473
-    28  3.4606e-02  1.2387e-04  5.2756e-05  2.4383e-02  1.7256e-04  0:00:35  472
-    29  3.3171e-02  1.1983e-04  5.2309e-05  2.3110e-02  1.6426e-04  0:00:35  471
-    30  3.2409e-02  1.1642e-04  5.0385e-05  2.1994e-02  1.5060e-04  0:00:34  470
-    31  3.0946e-02  1.1095e-04  4.8023e-05  2.0103e-02  1.3759e-04  0:00:33  469
-    32  2.7777e-02  1.0440e-04  4.3796e-05  1.7915e-02  1.2247e-04  0:00:33  468
-    33  2.5508e-02  9.7358e-05  3.8280e-05  1.5969e-02  1.0555e-04  0:00:31  467
+    23  1.3552e-02  6.4232e-05  2.0675e-05  4.4417e-03  6.4074e-05  0:00:48  477
+    24  1.1680e-02  5.5013e-05  1.7459e-05  3.5223e-03  5.5662e-05  0:00:50  476
+    25  1.0051e-02  4.6831e-05  1.4969e-05  2.8745e-03  4.8693e-05  0:00:51  475
+    26  8.3927e-03  3.9410e-05  1.2061e-05  2.3781e-03  4.2732e-05  0:00:50  474
+    27  7.0928e-03  3.3129e-05  9.6472e-06  1.9303e-03  3.7791e-05  0:00:50  473
+    28  5.9853e-03  2.7928e-05  7.7185e-06  1.6060e-03  3.3731e-05  0:00:53  472
+    29  5.0563e-03  2.3393e-05  6.2746e-06  1.3539e-03  3.0304e-05  0:00:51  471
+    30  4.2858e-03  1.9567e-05  5.0772e-06  1.1711e-03  2.7345e-05  0:00:48  470
+    31  3.6169e-03  1.6301e-05  4.1601e-06  1.0243e-03  2.4801e-05  0:00:48  469
+    32  3.0844e-03  1.3475e-05  3.4158e-06  9.3365e-04  2.2473e-05  0:00:48  468
+    33  2.6877e-03  1.1228e-05  2.8325e-06  8.6705e-04  2.0749e-05  0:00:46  467
 
   iter  continuity  x-velocity  y-velocity           k       omega     time/iter
-    34  2.3471e-02  8.9497e-05  3.2542e-05  1.3975e-02  9.1149e-05  0:00:30  466
-    35  2.1006e-02  7.9340e-05  2.7044e-05  1.2384e-02  7.9506e-05  0:00:30  465
-    36  1.9334e-02  7.0443e-05  2.3444e-05  1.0901e-02  6.9143e-05  0:00:30  464
-    37  1.7014e-02  6.1218e-05  1.9976e-05  9.6108e-03  6.1134e-05  0:00:31  463
-    38  1.4839e-02  5.3612e-05  1.7549e-05  8.6198e-03  5.3793e-05  0:01:08  462
-    39  1.2975e-02  4.7452e-05  1.5209e-05  7.8578e-03  4.7482e-05  0:01:01  461
-    40  1.1367e-02  4.2943e-05  1.3024e-05  7.1982e-03  4.2155e-05  0:00:55  460
-    41  1.0104e-02  3.8814e-05  1.1049e-05  6.6146e-03  3.8066e-05  0:00:50  459
-    42  9.0749e-03  3.4994e-05  9.5194e-06  6.0348e-03  3.4390e-05  0:00:47  458
-    43  8.0714e-03  3.1299e-05  8.1636e-06  5.4893e-03  3.1207e-05  0:00:44  457
-    44  7.0337e-03  2.7630e-05  7.0652e-06  4.9408e-03  2.8347e-05  0:00:41  456
-
-  iter  continuity  x-velocity  y-velocity           k       omega     time/iter
-    45  6.1662e-03  2.4306e-05  6.1811e-06  4.4181e-03  2.5632e-05  0:00:38  455
-    46  5.4968e-03  2.1157e-05  5.4379e-06  3.9016e-03  2.3084e-05  0:00:37  454
-    47  4.9926e-03  1.8413e-05  4.8954e-06  3.4318e-03  2.0735e-05  0:00:37  453
-    48  4.5864e-03  1.6110e-05  4.5318e-06  2.9649e-03  1.8279e-05  0:00:36  452
-    49  4.1638e-03  1.4189e-05  4.1407e-06  2.6177e-03  1.6042e-05  0:00:35  451
-    50  3.7472e-03  1.2343e-05  3.7223e-06  2.3027e-03  1.3784e-05  0:00:33  450
-    51  3.3522e-03  1.0610e-05  3.2851e-06  1.9854e-03  1.1653e-05  0:00:32  449
-    52  2.9395e-03  8.9766e-06  2.8271e-06  1.7234e-03  9.7812e-06  0:00:32  448
-    53  2.5437e-03  7.4906e-06  2.4375e-06  1.4807e-03  8.1912e-06  0:00:33  447
-    54  2.1771e-03  6.2095e-06  2.0975e-06  1.2946e-03  7.0265e-06  0:00:33  446
-    55  1.8647e-03  5.1757e-06  1.8036e-06  1.1724e-03  6.2155e-06  0:00:34  445
-
-  iter  continuity  x-velocity  y-velocity           k       omega     time/iter
-    56  1.5918e-03  4.4519e-06  1.6020e-06  1.0586e-03  5.5730e-06  0:00:33  444
-    57  1.3812e-03  3.9741e-06  1.5049e-06  9.3961e-04  4.9603e-06  0:00:32  443
-    58  1.2201e-03  3.6680e-06  1.4323e-06  8.2315e-04  4.4299e-06  0:00:32  442
-    59  1.0877e-03  3.4242e-06  1.3472e-06  7.1531e-04  3.9278e-06  0:00:31  441
-    60  9.7651e-04  3.1420e-06  1.2325e-06  6.2729e-04  3.4785e-06  0:00:31  440
-!   60 solution is converged
+    34  2.3488e-03  9.4600e-06  2.4246e-06  8.0652e-04  1.9120e-05  0:00:47  466
+    35  2.0709e-03  8.0829e-06  2.2499e-06  7.5700e-04  1.7567e-05  0:00:47  465
+    36  1.8347e-03  7.1756e-06  2.2291e-06  7.0934e-04  1.5970e-05  0:00:46  464
+    37  1.6291e-03  6.4062e-06  2.2202e-06  6.6934e-04  1.4490e-05  0:00:47  463
+    38  1.4626e-03  5.7670e-06  2.1898e-06  6.2460e-04  1.3049e-05  0:01:39  462
+    39  1.3195e-03  5.1889e-06  2.1288e-06  5.8092e-04  1.1704e-05  0:01:28  461
+    40  1.2446e-03  4.7378e-06  2.0447e-06  5.4274e-04  1.0462e-05  0:01:20  460
+    41  1.1425e-03  4.2587e-06  1.9347e-06  5.0319e-04  9.2468e-06  0:01:14  459
+    42  1.0247e-03  3.8141e-06  1.8281e-06  4.6142e-04  8.1537e-06  0:01:13  458
+    43  9.1902e-04  3.3904e-06  1.7036e-06  4.2219e-04  7.1837e-06  0:01:09  457
+!   43 solution is converged
 Registering ReportDefFiles, ("C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\lift-rfile.out" "C:\Users\maxhu\Documents\VS_Code\me-341\project\airfoil_files\dp0\FFF\Fluent\.\\drag-rfile.out")
 Writing "| gzip -2cf > SolutionMonitor.gz"...
-Writing temporary file C:\\Users\\maxhu\\AppData\\Local\\Temp\\flntgz-341522 ...
+Writing temporary file C:\\Users\\maxhu\\AppData\\Local\\Temp\\flntgz-374682 ...
 Done.
 
-Writing data to C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_files\\dp0\\FFF\\Fluent\\FFF.1.ip ...
+Writing data to C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_files\\dp0\\FFF\\Fluent\\FFF.ip ...
 	x-coord
 	y-coord
 	pressure
@@ -204,25 +183,25 @@ Writing data to C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\airfoil_f
 	omega
 Done.
 
-Performance Timer for 60 iterations on 4 compute nodes
-  Average wall-clock time per iteration:                0.012 sec
-  Global reductions per iteration:                        109 ops
+Performance Timer for 43 iterations on 4 compute nodes
+  Average wall-clock time per iteration:                0.013 sec
+  Global reductions per iteration:                        110 ops
   Global reductions time per iteration:                 0.000 sec (0.0%)
-  Message count per iteration:                           5094 messages
-  Data transfer per iteration:                          0.256 MB
+  Message count per iteration:                           3914 messages
+  Data transfer per iteration:                          0.265 MB
   LE solves per iteration:                                  3 solves
-  LE wall-clock time per iteration:                     0.008 sec (62.5%)
+  LE wall-clock time per iteration:                     0.007 sec (57.3%)
   LE global solves per iteration:                           6 solves
-  LE global wall-clock time per iteration:              0.000 sec (1.6%)
-  LE global matrix maximum size:                           49
-  AMG cycles per iteration:                             6.400 cycles
-  Relaxation sweeps per iteration:                       1308 sweeps
+  LE global wall-clock time per iteration:              0.000 sec (1.3%)
+  LE global matrix maximum size:                           48
+  AMG cycles per iteration:                             6.605 cycles
+  Relaxation sweeps per iteration:                       1325 sweeps
   Relaxation exchanges per iteration:                       0 exchanges
   LE early protections (stall) per iteration:           0.000 times
   LE early protections (divergence) per iteration:      0.000 times
   Total SVARS touched:                                    380
 
-  Total wall-clock time:                                0.739 sec
+  Total wall-clock time:                                0.539 sec
 
-Transcript Stop Time:  03:34:51, 14 Mar 2025 Central Daylight Time 
-Total Transcript Time: 0 Minute 29 Second.
+Transcript Stop Time:  12:59:57, 17 Mar 2025 Central Daylight Time 
+Total Transcript Time: 0 Minute 44 Second.

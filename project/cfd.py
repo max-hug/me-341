@@ -15,7 +15,7 @@ wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scrip
 data = []
 
 # Read the CSV file
-with open("doe_v2.csv", "r") as file:
+with open("doe_v3.csv", "r") as file:
     reader = csv.reader(file)
     dvs_list = [list(map(str, row)) for row in reader]  # Change `str` to `float` if numbers
 dvs_list= np.array(dvs_list, dtype = float)
@@ -44,7 +44,7 @@ for dvs in dvs_list:
 
     wb.run_script_file("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\update.wbjn")
 
-    with open("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\dp_data.csv", "r", encoding="utf-8-sig") as f:
+    with open("C:\\Users\\maxhu\\Documents\\VS_Code\\me-341\\project\\scripts\\testing.csv", "r", encoding="utf-8-sig") as f:
         report = np.loadtxt(f, delimiter=',', usecols=(1, 2, ), skiprows=7)
 
     padded_dp =  [*dvs, *([0.0] * (max_length - len(dvs))), *report]

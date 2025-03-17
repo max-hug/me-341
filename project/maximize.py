@@ -66,7 +66,7 @@ ics_obj = [0] * 8
 print(optimal_obj)
 
 history = []
-for IC in range(175,199):
+for IC in range(379,380):
     
     num_slats = len(ics[IC]) - np.count_nonzero(ics[IC] == 0) - 6
 
